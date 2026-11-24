@@ -41,8 +41,8 @@ which computer runs which job.
 
 ### From joining to results
 
-1. **Join.** Install the app, let it prepare its engine, then create an account with the join
-   code from your group's host. Your computer joins with modest limits (about half of its
+1. **Join.** Install the app, let it prepare its engine, then paste the join code from your
+   group's host and type your name. No email or password. Your computer joins with modest limits (about half of its
    processor, a quarter of its memory, never on battery) and downloads the software that jobs
    use (Python and PyTorch) from the group's other computers.
 2. **Submit work.** On the **Jobs** page, paste a Python program and choose how much processor,
@@ -83,15 +83,15 @@ which computer runs which job.
 - **Private groups.** Only computers with a join code can join. The code also carries the
   host's key fingerprint, so your computer connects only to the real host, encrypted (TLS 1.3).
   Computers in a group talk to each other over encrypted connections with verified keys.
-- **Accounts.** Passwords are checked by the group host and stored there only as a one-way hash;
-  repeated wrong passwords lock an account for 15 minutes.
+- **No passwords to remember.** A computer joins with the join code; the group host creates an
+  account for it whose secret stays encrypted on that computer, and it reconnects by itself.
 - **Signed updates.** The app updates itself only with releases signed by the Ncompute
   developer, and refuses anything altered.
 
 ## Privacy
 
-- Your **name, email address and sign-in times** are kept by your group's host and may be shared
-  with the Ncompute developer. **Your password never is.**
+- Your **name** and the times your computer connects are kept by your group's host and may be
+  shared with the Ncompute developer. No email address or password is asked for.
 - Other members of your group can see your computer's name and its hardware and health
   (processor, memory, graphics card, temperatures, battery, the network link between computers),
   which is how work is placed safely.
@@ -111,7 +111,7 @@ which computer runs which job.
      off, the app turns it on (Windows asks for approval once and may need a restart). If the app
      says virtualization is turned off in the firmware, enable *Intel Virtualization Technology*
      (VT-x) or *SVM Mode* (AMD) in your computer's BIOS/UEFI settings.
-   - **Your account.** Create an account with the join code, or sign in.
+   - **Join a group.** Paste the join code and your name.
    - **Get ready.** The job software arrives from your group's computers.
 4. Keep the app open while you share. Closing it stops sharing; running jobs move elsewhere.
 
