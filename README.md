@@ -1,6 +1,6 @@
 # Ncompute
 
-**Combine the spare power of your group's computers into one private pool.**
+**Combine spare computing power from your group's devices into one private pool.**
 
 Ncompute links computers that belong to people who trust each other (friends, a team, a lab)
 into a private group. When someone needs to run something heavy, such as training an AI model
@@ -8,12 +8,11 @@ or processing a lot of data, Ncompute runs it on whichever computer in the group
 capacity. If that computer gets busy, hot, or switched off, the work moves to another computer
 and continues from where it stopped.
 
-**[Download the latest version](https://github.com/sagar2142/ncompute-releases/releases/latest)**
-(Windows 10 and 11, 64-bit)
+**[Download the Windows app](https://github.com/sagar2142/ncompute-releases/releases/latest)**
+(Windows 10 and 11, 64-bit) · **[Download a Linux worker kit](https://github.com/sagar2142/ncompute-releases/releases/tag/linux-worker-preview.1)**
 
-> Ncompute is an early preview. To use it you need a **join code** from the person who runs your
-> group. Groups currently work between computers on the same network (the same home, office or
-> lab Wi-Fi).
+> Ncompute is an early preview. Open the Windows app to host a group or enter a **join code**
+> to join someone else's group. Devices normally connect over the same home, office or lab network.
 
 ---
 
@@ -31,10 +30,9 @@ and continues from where it stopped.
         directly to each other, encrypted
 ```
 
-Every computer runs the **Ncompute app**. It contains a background helper, which watches the
-computer's health and follows its owner's limits, and a **sealed engine**, a small private
-environment in which all work runs. Work inside the engine cannot see the owner's files,
-programs or home network.
+Windows computers run the **Ncompute app**. Headless Linux devices run the **Linux worker**.
+Both watch the device's health, follow the owner's sharing limits, and run jobs in an isolated
+environment.
 
 One computer is the **group host**: it keeps the group's accounts and member list and decides
 which computer runs which job.
@@ -121,7 +119,26 @@ appears with what's new and an **Update now** button.
 **Uninstall** from Windows **Settings → Apps → Ncompute**. This also removes the engine and the
 job software it downloaded.
 
-## Requirements
+## Connect a Linux worker
+
+Use the [Linux worker kits](https://github.com/sagar2142/ncompute-releases/releases/tag/linux-worker-preview.1)
+to contribute CPU and RAM for Python jobs. Choose **ARM64** for a Raspberry Pi 4 or 5 running
+a 64-bit OS or another ARM64 device. Choose **x64 (amd64)** for an Intel or AMD Linux device.
+The kit needs a local Docker Engine with the containerd image store and resource limits enabled.
+
+1. Verify the archive against its SHA-256 file and extract it on the Linux device.
+2. In the extracted folder, run `./ncompute-worker run`. Leave it running while the Python
+   runtime loads.
+3. In Ncompute 0.3.0 on the Windows host, open **Groups → Invite a computer** and create a join code.
+4. On Linux, open a second terminal in the same folder. Run
+   `./ncompute-worker join --name "My worker"` and paste the code at the prompt.
+5. Run `./ncompute-worker status` to check readiness. When submitting a job in the Windows app,
+   select the Linux device under **Placement**.
+
+Use `./ncompute-worker pause` to stop sharing and `./ncompute-worker resume` to start again.
+The archive includes setup instructions for starting a worker at boot.
+
+## Windows requirements
 
 - Windows 10 or 11, 64-bit, with virtualization available (most computers from the last ten
   years).
@@ -132,7 +149,6 @@ job software it downloaded.
 
 ## Coming next
 
-- Creating and hosting a group from inside the app
 - Groups across different networks and cities
 - A code-signed installer (no Windows warning)
 
